@@ -309,7 +309,7 @@ window.PORTFOLIO = {
   ],
 
   about: {
-    bio: '[placeholder] Write 3–4 lines in your own voice: how you got into mobile, what kind of problems you enjoy, and what you want to build next.',
+    bio: "I got into mobile development because I enjoy building applications that people can use in their everyday lives. Over the past 3.5+ years, I've worked on Android and iOS apps, solving challenges around performance, native integrations, and user experience. I particularly enjoy debugging complex issues and turning ideas into smooth, reliable mobile experiences. Going forward, I want to build scalable, AI-powered mobile applications that solve real-world problems.",
     education: { label: 'EDUCATION · 2019 – 2023', title: 'B.Tech, Computer Science', place: 'Kanpur Institute of Technology' },
     internship: { label: 'INTERNSHIP · 2023', title: 'Frontend Developer', place: 'Edunet Foundation · IBM SkillBuild' },
     ways: [
