@@ -36,7 +36,7 @@
 
   // ---------- profile links ----------
   var P = D.profile;
-  var linkMap = { github: P.github, linkedin: P.linkedin, email: 'mailto:' + P.email, phone: 'tel:' + P.phone, cv: P.cv };
+  var linkMap = { github: P.github, linkedin: P.linkedin, email: 'mailto:' + P.email, phone: 'tel:' + P.phone, whatsapp: 'https://wa.me/' + P.phone.replace(/\D/g, ''), cv: P.cv };
   $$('[data-link]').forEach(function (el) {
     var v = linkMap[el.getAttribute('data-link')];
     if (v) el.setAttribute('href', v); else el.hidden = true;
