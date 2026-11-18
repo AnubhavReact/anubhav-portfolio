@@ -1,0 +1,8 @@
+# local backups and old files — not part of the site
+*.bak
+Assets/ANUBHAV_CV.old.pdf
+
+# tool state
+.netlify/
+.claude/
+.DS_Store
