@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anubhav Shukla — AI-Native Mobile Engineer</title>
+<meta name="description" content="Anubhav Shukla — AI-Native Mobile Engineer. 3.5+ years shipping iOS & Android apps with React Native and Swift/SwiftUI: LLM features, Bluetooth (BLE), geofencing, offline-first SQLite, CI/CD.">
+<meta name="author" content="Anubhav Shukla">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Anubhav Shukla — AI-Native Mobile Engineer">
+<meta property="og:description" content="React Native + Swift/SwiftUI engineer building AI-powered mobile apps. 8+ apps built, 6+ live on the App Store & Play Store.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="Assets/og-cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Anubhav Shukla — AI-Native Mobile Engineer">
+<meta name="twitter:description" content="React Native + Swift/SwiftUI. AI features, BLE, geofencing, offline-first. 6+ apps live.">
+<meta name="twitter:image" content="Assets/og-cover.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Hanken+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0a0c18;
+  --bg-2:#10132a;
+  --ink:#eef0fb;
+  --ink-soft:#9aa1c4;
+  --ink-faint:#5b6189;
+  --line:#232848;
+  --accent:#5b7cfa;
+  --accent-2:#a78bfa;
+  --accent-3:#ec4899;
+  --paper:#f4ede0;
+  --grad:linear-gradient(90deg,var(--accent),var(--accent-2) 55%,var(--accent-3));
+  --radius:18px;
+  --maxw:1180px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Hanken Grotesk',sans-serif;
+  font-weight:400;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+/* grain + glow atmosphere */
+body::before{
+  content:"";
+  position:fixed;inset:0;
+  background:
+    radial-gradient(circle at 78% 6%, rgba(91,124,250,.20), transparent 42%),
+    radial-gradient(circle at 14% 34%, rgba(167,139,250,.13), transparent 40%),
+    radial-gradient(circle at 20% 92%, rgba(236,72,153,.12), transparent 45%);
+  pointer-events:none;z-index:0;
+}
+body::after{
+  content:"";
+  position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+  opacity:.035;pointer-events:none;z-index:1;mix-blend-mode:overlay;
+}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;position:relative;z-index:2}
+
+/* ===== NAV ===== */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 32px;
+  backdrop-filter:blur(10px);
+  background:linear-gradient(to bottom, rgba(10,12,24,.82), rgba(10,12,24,0));
+  transition:background .3s;
+}
+nav .brand{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.82rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink-faint);white-space:nowrap;
+}
+nav .brand b{
+  font-weight:700;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+nav .links{display:flex;gap:4px;border:1px solid var(--line);border-radius:100px;padding:5px;background:rgba(238,240,251,.02)}
+nav .links a{
+  color:var(--ink-soft);text-decoration:none;
+  font-size:.82rem;font-weight:500;letter-spacing:.02em;
+  padding:8px 16px;border-radius:100px;
+  transition:color .25s,background .3s;position:relative;
+}
+nav .links a:hover{color:var(--ink)}
+nav .links a.active{background:var(--grad);color:#f4f6ff}
+
+/* hamburger */
+.nav-toggle{
+  display:none;width:44px;height:44px;border:1px solid var(--line);border-radius:11px;
+  background:rgba(10,12,24,.5);cursor:pointer;position:relative;z-index:60;
+  flex-direction:column;align-items:center;justify-content:center;gap:5px;
+}
+.nav-toggle span{display:block;width:18px;height:1.6px;background:var(--ink);border-radius:2px;transition:transform .3s,opacity .25s}
+.nav-toggle.open span:nth-child(1){transform:translateY(6.6px) rotate(45deg)}
+.nav-toggle.open span:nth-child(2){opacity:0}
+.nav-toggle.open span:nth-child(3){transform:translateY(-6.6px) rotate(-45deg)}
+
+@media(max-width:1100px){
+  .nav-toggle{display:flex}
+  nav{backdrop-filter:none}
+  nav .links{
+    position:fixed;inset:0;background:rgba(8,10,20,.96);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+    flex-direction:column;align-items:center;justify-content:center;gap:22px;
+    border:none;border-radius:0;padding:0;
+    opacity:0;visibility:hidden;transform:translateY(-10px);
+    transition:opacity .35s,transform .35s,visibility .35s;z-index:55;
+  }
+  nav .links.show{opacity:1;visibility:visible;transform:none}
+  nav .links a{font-size:1.7rem;font-family:'Fraunces',serif;font-weight:300;color:var(--ink);padding:6px 22px}
+  nav .links a.active{background:var(--grad)}
+}
+
+/* ===== HERO ===== */
+header{
+  min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+  padding-top:90px;padding-bottom:110px;position:relative;
+}
+header > *{position:relative;z-index:2}
+
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:64px}}
+
+/* hero background tech watermarks */
+.hero-deco{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.deco-atom{
+  position:absolute;top:4%;right:-6%;width:min(56vw,720px);height:auto;
+  color:var(--accent);opacity:.06;
+  animation:spin 60s linear infinite;
+}
+.deco-atom circle{fill:currentColor}
+.deco-expo{
+  position:absolute;bottom:-8%;left:-7%;width:min(34vw,420px);height:auto;
+  color:var(--accent-3);opacity:.05;transform:rotate(-12deg);
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:680px){
+  .deco-atom{width:90vw;right:-22%;top:8%;opacity:.05}
+  .deco-expo{width:60vw;opacity:.045}
+}
+
+/* ===== AVATAR RING (no photo — monogram + orbiting skill badges) ===== */
+.avatar-wrap{position:relative;width:min(78vw,380px);aspect-ratio:1/1;margin:0 auto}
+.avatar-ring{
+  position:absolute;inset:0;border-radius:50%;padding:2px;
+  background:conic-gradient(from 200deg,var(--accent),var(--accent-2),var(--accent-3),var(--accent));
+  animation:ringspin 16s linear infinite;
+}
+.avatar-ring::after{
+  content:"";position:absolute;inset:2px;border-radius:50%;
+  background:var(--bg-2);
+}
+@keyframes ringspin{to{transform:rotate(360deg)}}
+.avatar-core{
+  position:absolute;inset:16px;border-radius:50%;z-index:2;
+  display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(circle at 34% 28%,rgba(91,124,250,.18),transparent 60%),var(--bg-2);
+  overflow:hidden;
+}
+.avatar-core .mono{
+  font-family:'Fraunces',serif;font-weight:300;font-size:clamp(3.4rem,9vw,5.4rem);
+  letter-spacing:-.03em;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.avatar-core svg{position:absolute;inset:0;width:100%;height:100%;color:var(--ink);opacity:.09}
+.avatar-core svg circle{fill:currentColor}
+
+.fbadge{
+  position:absolute;display:inline-flex;align-items:center;gap:7px;
+  font-family:'JetBrains Mono',monospace;font-size:.74rem;font-weight:600;letter-spacing:.02em;
+  padding:9px 15px;border-radius:100px;white-space:nowrap;z-index:3;
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 10px 28px -8px rgba(0,0,0,.55);
+  animation:float 5s ease-in-out infinite;
+}
+.fbadge span{width:6px;height:6px;border-radius:50%;background:currentColor}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+.fbadge.b1{top:-2%;right:8%;background:rgba(91,124,250,.16);color:#a9bdff;animation-delay:.2s}
+.fbadge.b2{top:22%;left:-12%;background:rgba(52,211,153,.16);color:#7fe6bd;animation-delay:1.4s}
+.fbadge.b3{bottom:26%;right:-13%;background:rgba(236,72,153,.16);color:#f7a8cf;animation-delay:.7s}
+.fbadge.b4{bottom:4%;left:-6%;background:rgba(251,146,60,.16);color:#fdba8c;animation-delay:2s}
+.fbadge.b5{top:50%;right:6%;background:rgba(167,139,250,.18);color:#cbb8ff;animation-delay:2.6s}
+.fbadge.b6{top:2%;left:16%;background:rgba(251,191,36,.16);color:#fde68a;animation-delay:1.9s}
+.fbadge.b7{bottom:-4%;right:22%;background:rgba(45,212,191,.16);color:#8fe9de;animation-delay:1.1s}
+@media(prefers-reduced-motion:reduce){
+  .fbadge,.avatar-ring{animation:none}
+}
+@media(max-width:900px){
+  .fbadge{font-size:.66rem;padding:6px 11px}
+  .fbadge.b2{left:-4%}.fbadge.b3{right:-3%}.fbadge.b4{left:0}.fbadge.b6{left:10%}.fbadge.b7{right:14%}
+}
+@media(max-width:480px){
+  .avatar-wrap{width:76vw}
+  .fbadge{display:none}
+  .fbadge.b1,.fbadge.b3{display:inline-flex}
+  .fbadge.b1{top:-4%;right:2%}
+  .fbadge.b3{bottom:-2%;left:2%}
+}
+.eyebrow{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.78rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:30px;
+  display:flex;align-items:center;gap:14px;
+}
+.eyebrow::before{content:"";width:46px;height:1px;background:var(--accent);display:inline-block}
+
+.hero-name{
+  font-family:'Fraunces',serif;
+  font-weight:300;
+  font-size:clamp(3.4rem,11vw,9.5rem);
+  line-height:.92;
+  letter-spacing:-.02em;
+  color:var(--ink);
+}
+.hero-name .it{font-style:italic;font-weight:400;color:var(--accent-2)}
+.hero-name .last{display:block;margin-left:.06em}
+
+.hero-sub{
+  margin-top:34px;max-width:620px;
+  font-size:clamp(1.05rem,2.2vw,1.32rem);
+  color:var(--ink-soft);line-height:1.55;font-weight:400;
+}
+.hero-sub b{color:var(--ink);font-weight:600}
+
+.hero-meta{
+  margin-top:42px;display:flex;flex-wrap:wrap;gap:14px;
+}
+.chip{
+  display:inline-flex;align-items:center;gap:9px;
+  border:1px solid var(--line);border-radius:100px;
+  padding:10px 18px;font-size:.85rem;color:var(--ink-soft);
+  font-family:'JetBrains Mono',monospace;letter-spacing:.02em;
+  text-decoration:none;transition:.25s;background:rgba(238,240,251,.03);
+}
+.chip:hover{border-color:var(--accent);color:var(--accent-2);transform:translateY(-2px)}
+.chip .dot{width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.chip.cv{background:var(--grad);color:#f4f6ff;border-color:transparent;font-weight:600}
+.chip.cv:hover{filter:brightness(1.12);color:#f4f6ff;border-color:transparent}
+
+/* availability badge */
+.avail{
+  display:inline-flex;align-items:center;gap:10px;margin:-14px 0 30px;
+  font-family:'JetBrains Mono',monospace;font-size:.8rem;letter-spacing:.04em;color:var(--ink-soft);
+}
+.avail-dot{width:9px;height:9px;border-radius:50%;background:#46d27e;animation:pulse 2.2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(70,210,126,.55)}70%{box-shadow:0 0 0 10px rgba(70,210,126,0)}100%{box-shadow:0 0 0 0 rgba(70,210,126,0)}}
+
+.scroll-hint{
+  position:absolute;bottom:34px;left:28px;
+  font-family:'JetBrains Mono',monospace;font-size:.7rem;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--ink-faint);
+  display:flex;align-items:center;gap:10px;
+}
+.scroll-hint .bar{width:1px;height:34px;background:linear-gradient(var(--accent),transparent);animation:drop 2s infinite}
+@keyframes drop{0%{opacity:.2;transform:scaleY(.4);transform-origin:top}50%{opacity:1;transform:scaleY(1)}100%{opacity:.2;transform:scaleY(.4);transform-origin:bottom}}
+
+/* stat cards (About section) */
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.stats .stat{
+  border:1px solid var(--line);border-radius:16px;padding:24px;text-align:center;
+  background:rgba(238,240,251,.012);transition:.25s;
+}
+.stats .stat:hover{border-color:rgba(91,124,250,.5);transform:translateY(-3px)}
+.stats .ico{font-size:1.4rem;margin-bottom:12px;display:block}
+.stats .num{font-family:'Fraunces',serif;font-size:clamp(1.8rem,3.6vw,2.6rem);font-weight:400;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1}
+.stats .lbl{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin-top:10px}
+
+/* ===== SECTION SHELL ===== */
+section{padding:90px 0;position:relative}
+.sec-head{display:flex;align-items:baseline;gap:18px;margin-bottom:54px}
+.sec-num{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--accent);letter-spacing:.1em}
+.sec-title{
+  font-family:'Fraunces',serif;font-weight:300;
+  font-size:clamp(2rem,5vw,3.4rem);letter-spacing:-.01em;
+  line-height:1.18;padding-bottom:.12em;
+}
+.sec-title em{font-style:italic;color:var(--accent-2)}
+.sec-rule{flex:1;height:1px;background:var(--line);align-self:center;margin-left:8px}
+
+/* ===== SUMMARY ===== */
+.about-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:50px;align-items:start}
+@media(max-width:860px){.about-grid{grid-template-columns:1fr;gap:36px}}
+.summary{max-width:900px}
+.summary p{
+  font-family:'Hanken Grotesk',sans-serif;font-weight:300;
+  font-size:clamp(1.02rem,1.7vw,1.18rem);line-height:1.72;
+  color:var(--ink-faint);margin-bottom:22px;
+}
+.summary p:last-child{margin-bottom:0}
+.summary p b{color:var(--ink);font-weight:600}
+.summary .lead{
+  font-family:'Fraunces',serif;font-weight:300;
+  font-size:clamp(1.25rem,2.6vw,1.7rem);line-height:1.5;
+  color:var(--ink-soft);
+  border-left:2px solid var(--accent);padding-left:26px;margin-bottom:32px;
+}
+.summary .lead b{color:var(--accent-2);font-weight:400}
+
+/* ===== EXPERIENCE ===== */
+.exp{position:relative}
+.exp::before{
+  content:"";position:absolute;top:6px;bottom:6px;right:14px;width:2px;background:var(--line);
+}
+.job{
+  position:relative;width:calc(100% - 78px);
+  border:1px solid var(--line);border-radius:20px;
+  padding:38px 32px 32px;margin-bottom:44px;
+  background:rgba(238,240,251,.012);
+  transition:border-color .3s ease,box-shadow .3s ease,background .3s ease;
+}
+.job:last-child{margin-bottom:0}
+.job:hover,.job.expanded{
+  border-color:rgba(91,124,250,.4);
+  box-shadow:0 24px 60px -30px rgba(91,124,250,.45);
+  background:linear-gradient(160deg,rgba(91,124,250,.06),rgba(167,139,250,.015) 60%,transparent);
+}
+.job::before{content:"";position:absolute;top:40px;left:100%;width:64px;height:2px;background:var(--line)}
+.job::after{
+  content:"";position:absolute;top:40px;left:calc(100% + 64px);transform:translate(-50%,-50%);
+  width:13px;height:13px;border-radius:50%;background:var(--grad);
+  box-shadow:0 0 0 5px var(--bg),0 0 16px -2px rgba(91,124,250,.6);
+  transition:box-shadow .3s;
+}
+.job:hover::after,.job.expanded::after{box-shadow:0 0 0 5px var(--bg),0 0 22px 0 rgba(167,139,250,.85)}
+
+.job-date{
+  position:absolute;top:-17px;left:30px;display:inline-flex;align-items:center;gap:8px;
+  background:var(--bg);border:1px solid var(--line);border-radius:100px;padding:7px 16px;
+  font-family:'JetBrains Mono',monospace;font-size:.76rem;color:var(--ink-soft);letter-spacing:.02em;
+}
+.job-top{display:flex;align-items:flex-start;gap:16px;margin-bottom:16px}
+.job-ico{
+  width:44px;height:44px;border-radius:13px;flex:none;font-size:1.15rem;
+  display:flex;align-items:center;justify-content:center;background:var(--grad);
+}
+.job-top h3{font-family:'Fraunces',serif;font-weight:400;font-size:1.5rem;letter-spacing:-.01em;margin-bottom:5px}
+.job-top .employer{color:var(--accent-2);font-weight:600;font-size:.92rem}
+.job-top .co{font-size:.85rem;color:var(--ink-faint);margin-top:3px}
+.job-toggle{
+  margin-left:auto;flex:none;width:34px;height:34px;border-radius:50%;
+  border:1px solid var(--line);background:none;color:var(--ink-soft);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.25s;
+}
+.job-toggle:hover{border-color:var(--accent);color:var(--accent-2)}
+.job-toggle .chev{transition:transform .35s;display:block}
+.job.expanded .job-toggle .chev{transform:rotate(180deg)}
+.job-loc{
+  display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:100px;
+  padding:6px 14px;font-size:.78rem;color:var(--ink-faint);margin-bottom:24px;
+}
+.job ul{
+  list-style:none;display:flex;flex-direction:column;gap:12px;
+  position:relative;max-height:120px;overflow:hidden;
+  transition:max-height .6s cubic-bezier(.22,.7,.2,1);
+}
+.job:hover ul,.job:focus-within ul,.job.expanded ul{max-height:1700px}
+.job ul::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:52px;
+  background:linear-gradient(transparent,var(--bg) 92%);
+  pointer-events:none;opacity:1;transition:opacity .4s;
+}
+.job:hover ul::after,.job.expanded ul::after{opacity:0}
+.job li{padding-left:24px;position:relative;color:var(--ink-soft);font-size:.96rem;max-width:680px}
+.job li::before{content:"›";position:absolute;left:0;top:-1px;color:var(--accent);font-weight:700}
+.job li b{color:var(--ink);font-weight:600}
+@media(max-width:820px){
+  .exp::before{display:none}
+  .job{width:100%}
+  .job::before,.job::after{display:none}
+}
+@media(max-width:600px){
+  .job{padding:32px 22px 26px}
+  .job-date{left:20px}
+}
+
+/* ===== PROJECTS ===== */
+.proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+@media(max-width:760px){.proj-grid{grid-template-columns:1fr}}
+.card{
+  border:1px solid var(--line);border-radius:var(--radius);
+  background:linear-gradient(160deg,rgba(238,240,251,.025),rgba(238,240,251,0));
+  position:relative;overflow:hidden;transition:.35s;
+  display:flex;flex-direction:column;text-decoration:none;color:inherit;
+}
+.card::before{
+  content:"";position:absolute;inset:0;border-radius:var(--radius);
+  background:radial-gradient(circle at var(--mx,50%) var(--my,0%),rgba(167,139,250,.20),transparent 60%);
+  opacity:0;transition:opacity .35s;pointer-events:none;z-index:3;
+}
+.card:hover{border-color:rgba(167,139,250,.5);transform:translateY(-4px)}
+.card:hover::before{opacity:1}
+
+/* banner */
+.card-banner{
+  height:148px;position:relative;overflow:hidden;
+  border-bottom:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,rgba(91,124,250,.24),rgba(236,72,153,.10)),var(--bg-2);
+}
+.card-banner .init{
+  font-family:'Fraunces',serif;font-size:4.4rem;font-weight:300;
+  color:rgba(238,240,251,.10);letter-spacing:-.02em;line-height:1;
+  transition:.4s;
+}
+.card:hover .card-banner .init{color:rgba(167,139,250,.22);transform:scale(1.06)}
+.card.has-img .init{display:none}
+.card.has-img .card-banner{background:var(--bg-2)}
+.card.has-img .card-banner::before{
+  content:"";position:absolute;inset:-30%;
+  background:var(--banner) center/cover no-repeat;
+  filter:blur(34px) saturate(1.3);opacity:.55;transform:scale(1.1);
+}
+.card.has-img .card-banner::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(10,12,24,.92),rgba(10,12,24,.2) 70%);
+}
+.app-icon{
+  position:relative;z-index:2;width:84px;height:84px;border-radius:21px;
+  object-fit:cover;box-shadow:0 14px 34px -6px rgba(0,0,0,.6);
+  border:1px solid rgba(238,240,251,.12);transition:transform .4s;
+}
+.card:hover .app-icon{transform:scale(1.07) translateY(-2px)}
+.card-body{padding:28px 30px 30px;flex:1;display:flex;flex-direction:column}
+.card-actions{margin-top:auto;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.card-cta{
+  font-family:'JetBrains Mono',monospace;font-size:.76rem;letter-spacing:.06em;
+  color:var(--accent);display:inline-flex;align-items:center;gap:7px;text-decoration:none;
+  border:1px solid var(--line);padding:8px 15px;border-radius:9px;transition:.25s;
+}
+.card-cta .arr{transition:transform .25s}
+.card-cta:hover{border-color:var(--accent);background:rgba(91,124,250,.14)}
+.card:hover .card-cta{border-color:rgba(167,139,250,.55)}
+.card-cta:hover .arr,.card:hover .card-cta .arr{transform:translate(2px,-2px)}
+.card .ptop{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
+.card h3{font-family:'Fraunces',serif;font-weight:400;font-size:1.55rem;letter-spacing:-.01em}
+.card .pdate{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--ink-faint);letter-spacing:.04em;white-space:nowrap;margin-top:8px}
+.card .ptag{font-size:.84rem;color:var(--accent-2);font-style:italic;font-family:'Fraunces',serif;margin-bottom:20px;display:block}
+.card ul{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:22px}
+.card li{padding-left:20px;position:relative;color:var(--ink-soft);font-size:.92rem}
+.card li::before{content:"—";position:absolute;left:0;color:var(--accent);opacity:.7}
+.card .badge{
+  position:absolute;top:0;right:0;z-index:4;
+  font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.1em;
+  background:var(--grad);color:#f4f6ff;padding:5px 12px;border-bottom-left-radius:10px;font-weight:600;
+}
+
+/* ===== SKILLS ===== */
+.skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:28px}
+@media(max-width:760px){.skills-grid{grid-template-columns:1fr}}
+.skill-card{border:1px solid var(--line);border-radius:16px;padding:28px}
+.skill-card .sc-head{display:flex;align-items:center;gap:14px;margin-bottom:26px}
+.skill-card .sc-ico{
+  width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;
+  background:var(--grad);font-size:1.05rem;flex:none;color:#fff;
+}
+.skill-card h3{font-family:'Fraunces',serif;font-weight:400;font-size:1.2rem}
+.skill-card .sc-sub{font-size:.78rem;color:var(--ink-faint);margin-top:2px}
+.skill-row{margin-bottom:18px}
+.skill-row:last-child{margin-bottom:0}
+.skill-row .sr-top{display:flex;justify-content:space-between;font-size:.85rem;margin-bottom:8px}
+.skill-row .sr-top span:first-child{color:var(--ink-soft);font-weight:500}
+.skill-row .sr-top span:last-child{font-family:'JetBrains Mono',monospace;color:var(--ink-faint);font-size:.76rem}
+.skill-row .bar{height:6px;border-radius:4px;background:var(--line);overflow:hidden}
+.skill-row .bar i{display:block;height:100%;border-radius:4px;background:var(--grad);width:var(--pct,0%)}
+
+.dist-strip{display:flex;flex-wrap:wrap;gap:12px;border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin-bottom:40px}
+.dist-strip .di{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--ink-soft);border:1px solid var(--line);border-radius:100px;padding:8px 16px}
+.dist-strip .di b{color:var(--accent-2);font-weight:600}
+
+.more-skills-label{
+  font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-faint);margin-bottom:16px;
+}
+.skill-cloud{display:flex;flex-wrap:wrap;gap:11px}
+.skill{
+  font-family:'JetBrains Mono',monospace;font-size:.82rem;
+  border:1px solid var(--line);border-radius:8px;padding:9px 15px;
+  color:var(--ink-soft);transition:.22s;cursor:default;letter-spacing:.01em;
+}
+.skill:hover{color:#fff;background:var(--grad);border-color:transparent;transform:translateY(-3px) rotate(-1.5deg)}
+
+/* ===== GITHUB ===== */
+.gh-intro{color:var(--ink-faint);font-size:.95rem;margin:-30px 0 34px}
+.gh-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:900px){.gh-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.gh-grid{grid-template-columns:1fr}}
+.gh-state{grid-column:1/-1;color:var(--ink-faint);font-family:'JetBrains Mono',monospace;font-size:.85rem;text-align:center;padding:20px 0}
+.gh-card{
+  border:1px solid var(--line);border-radius:16px;padding:26px;
+  display:flex;flex-direction:column;text-decoration:none;color:inherit;
+  background:rgba(238,240,251,.012);transition:.3s;
+}
+.gh-card:hover{border-color:rgba(91,124,250,.45);transform:translateY(-4px)}
+.gh-card .gh-top{display:flex;align-items:center;gap:9px;margin-bottom:10px}
+.gh-card .gh-top svg{flex:none;color:var(--ink-faint)}
+.gh-card h3{font-family:'JetBrains Mono',monospace;font-size:.98rem;font-weight:600;color:var(--ink);word-break:break-word}
+.gh-card p{font-size:.87rem;color:var(--ink-soft);line-height:1.55;margin:2px 0 20px;flex:1}
+.gh-card .gh-meta{display:flex;align-items:center;gap:16px;font-size:.76rem;color:var(--ink-faint);font-family:'JetBrains Mono',monospace}
+.gh-card .gh-lang{display:inline-flex;align-items:center;gap:6px}
+.gh-card .gh-lang i{width:8px;height:8px;border-radius:50%;background:currentColor;display:inline-block;font-style:normal}
+.gh-cta{margin-top:36px;text-align:center}
+
+/* ===== STRENGTHS ===== */
+.str-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:760px){.str-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.str-grid{grid-template-columns:1fr}}
+.str{
+  border:1px solid var(--line);border-radius:12px;padding:24px;
+  display:flex;align-items:center;gap:16px;transition:.25s;background:rgba(238,240,251,.012);
+}
+.str:hover{border-color:var(--accent);transform:translateY(-3px)}
+.str .ico{font-size:1.5rem;filter:saturate(1.2)}
+.str span{font-weight:600;font-size:.98rem;color:var(--ink)}
+
+/* ===== EDU + CTA ===== */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+@media(max-width:760px){.two-col{grid-template-columns:1fr;gap:40px}}
+.edu-card{border-left:2px solid var(--accent);padding-left:24px}
+.edu-card h3{font-family:'Fraunces',serif;font-weight:400;font-size:1.45rem;margin-bottom:6px}
+.edu-card .co{color:var(--accent-2);font-size:.95rem;margin-bottom:6px}
+.edu-card .meta{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--ink-faint)}
+.edu-card .edu-desc{margin-top:12px;font-size:.92rem;color:var(--ink-soft);line-height:1.55;max-width:460px}
+
+/* ===== CONTACT ===== */
+.contact{text-align:center;padding:110px 0 90px}
+.contact .big{
+  font-family:'Fraunces',serif;font-weight:300;
+  font-size:clamp(2.4rem,7vw,5.5rem);line-height:1;letter-spacing:-.02em;margin-bottom:36px;
+}
+.contact .big em{font-style:italic;color:var(--accent-2)}
+.contact-row{display:flex;flex-wrap:wrap;gap:16px;justify-content:center}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:15px 28px;border-radius:100px;text-decoration:none;
+  font-weight:600;font-size:.95rem;transition:.28s;
+  font-family:'JetBrains Mono',monospace;letter-spacing:.02em;
+}
+.btn.primary{background:var(--grad);color:#f4f6ff}
+.btn.primary:hover{filter:brightness(1.1);transform:translateY(-3px);box-shadow:0 14px 40px -12px rgba(139,92,246,.55)}
+.btn.ghost{border:1px solid var(--line);color:var(--ink-soft)}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent-2);transform:translateY(-3px)}
+
+footer{
+  border-top:1px solid var(--line);padding:30px 0;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
+  font-family:'JetBrains Mono',monospace;font-size:.74rem;color:var(--ink-faint);letter-spacing:.06em;
+}
+footer a{color:var(--ink-faint);text-decoration:none}
+footer a:hover{color:var(--accent)}
+
+
+/* hero role rail */
+.role-rail{margin-top:22px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;
+  font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--ink-soft)}
+.role-rail span{padding:6px 12px;border-radius:8px;background:rgba(91,124,250,.08);border:1px solid rgba(91,124,250,.22)}
+.role-rail i{font-style:normal;color:var(--accent-3);opacity:.8}
+.contract{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;
+  vertical-align:middle;margin-left:8px;padding:3px 8px;border-radius:6px;border:1px solid var(--line);color:var(--ink-faint)}
+.sc-swift{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.85rem!important}
+
+/* ===== CAPABILITIES BENTO ===== */
+.bento{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.cap{
+  --c:var(--accent);
+  position:relative;overflow:hidden;border:1px solid var(--line);border-radius:20px;padding:26px;
+  background:linear-gradient(160deg,color-mix(in srgb,var(--c) 9%,transparent),transparent 55%),rgba(238,240,251,.012);
+  display:flex;flex-direction:column;transition:border-color .3s,transform .3s;
+}
+.cap:hover{border-color:color-mix(in srgb,var(--c) 55%,transparent);transform:translateY(-4px)}
+.cap::after{content:"";position:absolute;width:180px;height:180px;right:-60px;top:-60px;border-radius:50%;
+  background:radial-gradient(circle,color-mix(in srgb,var(--c) 22%,transparent),transparent 70%);pointer-events:none}
+.cap-ai{grid-column:span 2;grid-row:span 2;--c:var(--accent-2)}
+.cap-ios{grid-column:span 2;--c:#f97362}
+.cap-ble{--c:#5b9cfa}
+.cap-geo{--c:#34d399}
+.cap-off{grid-column:span 2;--c:#fbbf24}
+.cap-sec{grid-column:span 2;--c:var(--accent-3)}
+.cap-ico{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+  color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent);border:1px solid color-mix(in srgb,var(--c) 30%,transparent);margin-bottom:18px}
+.cap-ico svg{width:22px;height:22px}
+.cap-kicker{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--c);margin-bottom:8px}
+.cap h3{font-family:'Fraunces',serif;font-weight:400;font-size:1.35rem;line-height:1.25;letter-spacing:-.01em;margin-bottom:10px}
+.cap-ai h3{font-size:clamp(1.6rem,2.6vw,2.1rem)}
+.cap p{color:var(--ink-soft);font-size:.92rem;line-height:1.6;margin-bottom:18px}
+.cap-proof{display:flex;flex-direction:column;gap:10px;margin-bottom:22px}
+.cap-proof span{font-size:.88rem;color:var(--ink-soft);padding:12px 14px;border-radius:12px;
+  background:rgba(238,240,251,.025);border:1px solid var(--line)}
+.cap-proof b{color:var(--ink);font-weight:600;margin-right:6px}
+.tags{margin-top:auto;display:flex;flex-wrap:wrap;gap:7px}
+.tags i{font-style:normal;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--ink-soft);
+  padding:5px 10px;border-radius:7px;border:1px solid var(--line);background:rgba(10,12,24,.4)}
+@media(max-width:980px){
+  .bento{grid-template-columns:repeat(2,1fr)}
+  .cap-ai{grid-row:auto}
+}
+@media(max-width:600px){
+  .bento{grid-template-columns:1fr}
+  .cap,.cap-ai,.cap-ios,.cap-off,.cap-sec{grid-column:auto}
+}
+
+/* BLE project card art */
+.card-ble .card-banner{background:radial-gradient(circle at 50% 60%,rgba(91,156,250,.28),transparent 65%),var(--bg-2)}
+.ble-art{width:120px;color:#8fb8ff;opacity:.85;transition:transform .4s}
+.card-ble:hover .ble-art{transform:scale(1.08)}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* cursor mascot */
+.cursor-pet{
+  position:fixed;top:0;left:0;z-index:9999;pointer-events:none;
+  font-size:26px;line-height:1;transform:translate(-50%,-50%) scale(.9) rotate(0deg);
+  filter:drop-shadow(0 6px 12px rgba(91,124,250,.4));
+  opacity:0;transition:opacity .3s ease;will-change:transform;
+}
+.cursor-pet.show{opacity:1}
+@media(hover:none),(max-width:900px),(prefers-reduced-motion:reduce){
+  .cursor-pet{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand"><b>AS</b> / ai-native mobile</div>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="links" id="navLinks">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#capabilities">Capabilities</a>
+    <a href="#work">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#github">GitHub</a>
+    <a href="#stack">Stack</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <header id="home">
+    <!-- decorative tech watermarks -->
+    <div class="hero-deco" aria-hidden="true">
+      <svg class="deco-atom" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="7.5"></circle>
+        <g fill="none" stroke="currentColor" stroke-width="2.4">
+          <ellipse cx="50" cy="50" rx="46" ry="17.5"></ellipse>
+          <ellipse cx="50" cy="50" rx="46" ry="17.5" transform="rotate(60 50 50)"></ellipse>
+          <ellipse cx="50" cy="50" rx="46" ry="17.5" transform="rotate(120 50 50)"></ellipse>
+        </g>
+      </svg>
+      <svg class="deco-expo" viewBox="0 0 120 90">
+        <path d="M12 78 L58 14 a6 6 0 0 1 9.6 0 L113 78"
+              fill="none" stroke="currentColor" stroke-width="14"
+              stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    </div>
+
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">AI-Native Mobile Engineer</div>
+        <div class="avail reveal"><span class="avail-dot"></span> Open to iOS &amp; React Native roles · freelance</div>
+        <h1 class="hero-name">Anubhav<span class="last"><span class="it">Shukla</span></span></h1>
+        <p class="hero-sub">
+          I build <b>AI-powered mobile apps</b> for iOS &amp; Android with
+          <b>React&nbsp;Native</b> and native <b>Swift / SwiftUI</b> — LLM assistants,
+          Bluetooth hardware, geofencing and offline-first data — and ship them
+          to the App&nbsp;Store &amp; Play&nbsp;Store with CI/CD.
+        </p>
+        <div class="role-rail" aria-label="Core stack">
+          <span>Swift · SwiftUI</span><i>+</i><span>React Native</span><i>+</i><span>TypeScript</span><i>+</i><span>LLM / AI</span>
+        </div>
+        <div class="hero-meta">
+          <a class="chip" href="mailto:shuklaanubhav0512@gmail.com"><span class="dot"></span>shuklaanubhav0512@gmail.com</a>
+          <a class="chip" href="tel:+917905078911"><span class="dot"></span>+91 79050 78911</a>
+          <a class="chip" href="https://www.linkedin.com/in/anubhav-shukla-6028041ab" target="_blank" rel="noopener"><span class="dot"></span>LinkedIn</a>
+          <a class="chip" href="https://github.com/AnubhavReact" target="_blank" rel="noopener"><span class="dot"></span>GitHub</a>
+          <span class="chip"><span class="dot"></span>Gurugram / Noida, IN</span>
+          <a class="chip cv" href="Assets/ANUBHAV_CV.pdf" download><span class="dot" style="background:#fff"></span>Download CV ↓</a>
+        </div>
+      </div>
+
+      <div class="avatar-wrap reveal" aria-hidden="true">
+        <div class="avatar-ring"></div>
+        <div class="avatar-core">
+          <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="7.5"></circle>
+            <g fill="none" stroke="currentColor" stroke-width="2.4">
+              <ellipse cx="50" cy="50" rx="46" ry="17.5"></ellipse>
+              <ellipse cx="50" cy="50" rx="46" ry="17.5" transform="rotate(60 50 50)"></ellipse>
+              <ellipse cx="50" cy="50" rx="46" ry="17.5" transform="rotate(120 50 50)"></ellipse>
+            </g>
+          </svg>
+          <span class="mono">AS</span>
+        </div>
+        <span class="fbadge b1"><span></span>React Native</span>
+        <span class="fbadge b2"><span></span>Swift · SwiftUI</span>
+        <span class="fbadge b3"><span></span>AI / LLM</span>
+        <span class="fbadge b4"><span></span>Bluetooth BLE</span>
+        <span class="fbadge b5"><span></span>3.5+ Yrs</span>
+        <span class="fbadge b6"><span></span>Offline-first</span>
+        <span class="fbadge b7"><span></span>Geofencing</span>
+      </div>
+    </div>
+
+    <div class="scroll-hint"><span class="bar"></span>scroll</div>
+  </header>
+
+  <!-- ABOUT / SUMMARY -->
+  <section id="about">
+    <div class="sec-head reveal">
+      <span class="sec-num">01</span>
+      <h2 class="sec-title">The <em>summary</em></h2>
+      <span class="sec-rule"></span>
+    </div>
+    <div class="about-grid">
+      <div class="summary">
+        <p class="reveal lead">
+          AI-native mobile engineer with <b>3.5+ years</b> building and shipping production apps for
+          iOS &amp; Android — <b>8+ built, 6+ live</b> on the stores, one serving <b>100K+ active users</b>.
+          I put <b>LLMs inside products</b> (AWS Bedrock, Gemini assistants, AI budget planning) and use
+          AI tooling — Claude, Cursor — to ship them faster.
+        </p>
+        <p class="reveal">
+          A <b>React Native &amp; iOS</b> engineer: hands-on <b>native iOS</b> in <b>Swift, SwiftUI, UIKit &amp;
+          Objective-C</b> — native modules where RN falls short, and native screens built with MVVM in Xcode —
+          on top of strong <b>TypeScript / React Native</b>. Working knowledge of Node.js / Express &amp; MySQL.
+        </p>
+        <p class="reveal">
+          The hard device-level parts are where I'm most useful: <b>Bluetooth (BLE)</b> hardware control,
+          <b>geofencing &amp; live location</b>, <b>offline-first SQLite sync</b> for low-connectivity field work,
+          <b>certificate pinning, Keychain &amp; VAPT-hardened</b> builds, VoIP calling, payments, and CI/CD with EAS,
+          Fastlane &amp; GitHub Actions.
+        </p>
+      </div>
+
+      <div class="stats reveal">
+        <div class="stat"><span class="ico">💼</span><div class="num">3.5+</div><div class="lbl">Years Shipping</div></div>
+        <div class="stat"><span class="ico">📱</span><div class="num">8+</div><div class="lbl">Apps Built</div></div>
+        <div class="stat"><span class="ico">🚀</span><div class="num">6+</div><div class="lbl">Live on Stores</div></div>
+        <div class="stat"><span class="ico">👥</span><div class="num">100K+</div><div class="lbl">Active Users</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPABILITIES -->
+  <section id="capabilities">
+    <div class="sec-head reveal">
+      <span class="sec-num">02</span>
+      <h2 class="sec-title">What I <em>build</em></h2>
+      <span class="sec-rule"></span>
+    </div>
+
+    <div class="bento">
+      <article class="cap cap-ai reveal">
+        <div class="cap-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg></div>
+        <span class="cap-kicker">AI integrations</span>
+        <h3>LLMs inside the product, not beside it</h3>
+        <p>Context-aware assistants and AI-driven flows wired into real user journeys — health coaching, trip planning, budget configuration, job matching.</p>
+        <div class="cap-proof">
+          <span><b>Tripare.Ai</b> AI travel assistant &amp; budget engine</span>
+          <span><b>ToneOp</b> AWS Bedrock health assistant · 100K+ users</span>
+          <span><b>FairPair</b> skill-matrix job recommendations</span>
+        </div>
+        <div class="tags"><i>AWS Bedrock</i><i>Gemini</i><i>Prompting</i><i>Streaming chat UI</i><i>Claude · Cursor</i></div>
+      </article>
+
+      <article class="cap cap-ios reveal">
+        <div class="cap-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2.5" width="12" height="19" rx="3"/><path d="M10.5 5.5h3"/><path d="M10 13.5l-1.8-1.5L10 10.5M14 10.5l1.8 1.5L14 13.5"/></svg></div>
+        <span class="cap-kicker">Native iOS</span>
+        <h3>Swift &amp; SwiftUI when JS isn't enough</h3>
+        <p>Native modules bridged to React Native, and full native screens with MVVM.</p>
+        <div class="tags"><i>Swift</i><i>SwiftUI</i><i>UIKit</i><i>Obj-C</i><i>XCTest</i><i>App Store Connect</i></div>
+      </article>
+
+      <article class="cap cap-ble reveal">
+        <div class="cap-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7l10 10-5 4V3l5 4L7 17"/></svg></div>
+        <span class="cap-kicker">Bluetooth · BLE</span>
+        <h3>Talking to hardware</h3>
+        <p>Scan, pair and stream live device data; control temperature from the app with a resilient connection lifecycle.</p>
+        <div class="tags"><i>MyRena</i><i>BLE GATT</i><i>Device sync</i></div>
+      </article>
+
+      <article class="cap cap-geo reveal">
+        <div class="cap-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6-5.3-6-10a6 6 0 1 1 12 0c0 4.7-6 10-6 10z"/><circle cx="12" cy="11" r="2.2"/><path d="M4 20.5c1.8-.9 4.8-1.5 8-1.5s6.2.6 8 1.5" stroke-dasharray="2 2.4"/></svg></div>
+        <span class="cap-kicker">Geofencing · Location</span>
+        <h3>Knows where the user is</h3>
+        <p>Region-entry triggers, background tracking and live ETA for field inspections and on-demand services.</p>
+        <div class="tags"><i>Geofences</i><i>Google Maps</i><i>Live tracking</i></div>
+      </article>
+
+      <article class="cap cap-off reveal">
+        <div class="cap-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="7" ry="2.5"/><path d="M5 5.5v6c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-6"/><path d="M5 11.5v6c0 1.4 3.1 2.5 7 2.5 1 0 2-.1 2.8-.2"/><path d="M17 16l4 4M21 16l-4 4"/></svg></div>
+        <span class="cap-kicker">Offline-first · SQLite</span>
+        <h3>Works with zero bars</h3>
+        <p>Local SQLite as source of truth, queued writes and background sync once connectivity returns.</p>
+        <div class="tags"><i>SQLite</i><i>Sync queues</i><i>TanStack Query</i></div>
+      </article>
+
+      <article class="cap cap-sec reveal">
+        <div class="cap-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <span class="cap-kicker">Security &amp; Realtime</span>
+        <h3>Hardened and live</h3>
+        <p>SSL pinning, Keychain/Keystore, biometrics — plus PubNub chat, Twilio VoIP and payments.</p>
+        <div class="tags"><i>Cert pinning</i><i>Biometrics</i><i>Twilio VoIP</i><i>Stripe · IAP</i></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="work">
+    <div class="sec-head reveal">
+      <span class="sec-num">03</span>
+      <h2 class="sec-title">Where I've <em>worked</em></h2>
+      <span class="sec-rule"></span>
+    </div>
+
+    <div class="exp">
+      <article class="job reveal">
+        <span class="job-date">📅 02/2026 — Present</span>
+        <div class="job-top">
+          <span class="job-ico">💼</span>
+          <div>
+            <h3>Senior React Native Developer</h3>
+            <div class="employer">Antino Labs</div>
+            <div class="co">Tripare.Ai — AI-Powered Travel &amp; Budget App</div>
+          </div>
+          <button type="button" class="job-toggle" aria-expanded="false" aria-label="Toggle full details"><span class="chev">⌄</span></button>
+        </div>
+        <span class="job-loc">📍 Gurugram, India</span>
+        <ul>
+          <li>Architected a corporate travel &amp; expense app on the <b>Expo Preview Workflow</b> for full iOS/Android parity.</li>
+          <li>Built an <b>AI travel assistant</b> and an <b>AI-driven budget configuration</b> module with predictive trip planning.</li>
+          <li>Contributed a <b>Node.js / Express endpoint (MySQL)</b> powering a feature flag that controls OTA update availability.</li>
+          <li>Designed end-to-end <b>CI/CD pipelines</b> with GitHub Actions across Dev, UAT &amp; Production, with instant rollouts via <b>Expo Updates (OTA)</b>.</li>
+          <li>Integrated <b>BoxPay SDK</b> payments and notifications via Expo Push, FCM &amp; APNs.</li>
+          <li>Configured Universal Links, App Links &amp; deep linking; built gesture-driven UI with Reanimated &amp; Gesture Handler.</li>
+          <li>Implemented Google Sign-In &amp; Sign in with Apple; own App Store / Play Store releases with Crashlytics monitoring.</li>
+        </ul>
+      </article>
+
+      <article class="job reveal">
+        <span class="job-date">📅 10/2025 — 02/2026</span>
+        <div class="job-top">
+          <span class="job-ico">💼</span>
+          <div>
+            <h3>React Native Developer <span class="contract">Contract</span></h3>
+            <div class="employer">Bansal Technology</div>
+            <div class="co">ToneOp (100K+ users, 4.5★) · Appofit</div>
+          </div>
+          <button type="button" class="job-toggle" aria-expanded="false" aria-label="Toggle full details"><span class="chev">⌄</span></button>
+        </div>
+        <span class="job-loc">📍 Bhopal, India</span>
+        <ul>
+          <li><b>ToneOp:</b> Improved stability &amp; performance for a wellness platform serving <b>100K+ active users</b>, rated 4.5★ across 1.29K reviews.</li>
+          <li>Integrated an <b>AI Health Assistant on AWS Bedrock</b> for personalised health, fitness &amp; nutrition guidance.</li>
+          <li>Fixed performance bottlenecks with Reactotron &amp; React Profiler — removed redundant on-mount calls, memoised rows, migrated heavy lists to <b>FlashList</b> for low-end Android.</li>
+          <li>Contributed <b>REST endpoints in Node.js / Express / MySQL</b> alongside the backend team.</li>
+          <li><b>Appofit:</b> Architected a trainer &amp; gym platform from scratch with <b>Apple HealthKit &amp; Google Fit</b> wearable sync and Twilio chat.</li>
+          <li>Razorpay payments, New Relic monitoring, FCM &amp; Notifee push, and secure sessions persisting across reinstalls.</li>
+        </ul>
+      </article>
+
+      <article class="job reveal">
+        <span class="job-date">📅 06/2023 — 10/2025</span>
+        <div class="job-top">
+          <span class="job-ico">💼</span>
+          <div>
+            <h3>React Native Developer</h3>
+            <div class="employer">TechAhead</div>
+            <div class="co">FairPair · Olive · Republic Indemnity · On-Demand Service App</div>
+          </div>
+          <button type="button" class="job-toggle" aria-expanded="false" aria-label="Toggle full details"><span class="chev">⌄</span></button>
+        </div>
+        <span class="job-loc">📍 Noida, India</span>
+        <ul>
+          <li>Developed &amp; deployed scalable <b>React Native</b> apps for iOS and Android using clean, maintainable, industry-standard architectures.</li>
+          <li>Contributed to <b>5+ mobile applications</b>, publishing <b>3 production apps</b> on both the App Store and Play Store.</li>
+          <li>Authored <b>native iOS modules in Swift / Objective-C</b> (and Kotlin/Java on Android) to complete <b>Twilio</b> in-app calling — custom call UI, mute/hangup, VoIP push &amp; rich call notifications — where RN support was incomplete.</li>
+          <li>Built <b>native iOS screens with SwiftUI / UIKit and MVVM</b>, integrating REST APIs and handling signing, provisioning &amp; App Store submissions in Xcode.</li>
+          <li>Integrated <b>Bluetooth (BLE)</b> hardware for MyRena — device discovery, live data &amp; remote temperature control.</li>
+          <li>Built an <b>offline-first</b> field-inspection app with <b>SQLite sync</b>, <b>geofencing</b> &amp; live location, hardened with SSL pinning &amp; secure storage.</li>
+          <li>Built real-time 1-to-1 and group chat with <b>PubNub</b> — presence, typing indicators &amp; message sync.</li>
+          <li>Implemented secure payments with <b>Stripe, PayFort, BoxPay, Razorpay &amp; In-App Purchases</b> for subscriptions and one-time payments.</li>
+          <li>Integrated <b>Firebase</b> — Cloud Messaging, Crashlytics, Analytics, Dynamic Links, Remote Config &amp; Authentication for production-grade apps.</li>
+          <li>Implemented <b>Deep Linking</b> via Firebase Dynamic Links and Universal Links / App Links for seamless cross-platform navigation.</li>
+          <li>Integrated analytics &amp; monitoring with <b>Mixpanel and New Relic Mobile</b> to track behavior, performance, crashes &amp; business metrics.</li>
+          <li>Shipped <b>OTA updates via Expo Updates</b>, enabling rapid feature releases without store approvals.</li>
+          <li>Built and maintained automated <b>CI/CD pipelines</b> with Expo EAS and Fastlane — build generation, code signing, testing &amp; deployments.</li>
+          <li>Reduced FairPair load time by <b>20%</b> and lifted Olive's store rating from <b>1★ to 4★+</b> by fixing critical crashes.</li>
+          <li>Optimized performance through efficient state management, lazy loading, memory optimization &amp; improved rendering for a smoother UX.</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="sec-head reveal">
+      <span class="sec-num">04</span>
+      <h2 class="sec-title">Selected <em>projects</em></h2>
+      <span class="sec-rule"></span>
+    </div>
+
+    <div class="proj-grid">
+      <div class="card has-img reveal" style="--banner:url('Assets/Tripare.webp')">
+        <span class="badge">LIVE</span>
+        <div class="card-banner"><img class="app-icon" src="Assets/Tripare.webp" alt="Tripare.ai icon"></div>
+        <div class="card-body">
+          <div class="ptop"><h3>Tripare.Ai</h3><span class="pdate">02/2026 — Present</span></div>
+          <span class="ptag">AI-Powered Corporate Travel &amp; Expense Management</span>
+          <ul>
+            <li>Cross-platform React Native (Expo) app with Expo Preview Workflow for iOS/Android parity</li>
+            <li>AI features — intelligent travel assistant, automated budget config &amp; predictive planning</li>
+            <li>CI/CD via GitHub Actions for Dev, UAT &amp; Production builds, testing &amp; deployments</li>
+            <li>OTA updates via Expo Updates for instant releases without store approvals</li>
+            <li>BoxPay SDK for secure multi-channel payments &amp; seamless checkout</li>
+            <li>Expo Push, Firebase FCM &amp; APNs for booking, reminder &amp; approval notifications</li>
+            <li>Universal Links, App Links &amp; Deep Linking from emails, notifications &amp; external sources</li>
+            <li>Gesture Handler &amp; Reanimated for smooth, gesture-driven interactions</li>
+            <li>Native auth with Google Sign-In &amp; Sign in with Apple</li>
+            <li>Published &amp; maintained on App Store &amp; Play Store with versioning &amp; release management</li>
+          </ul>
+          <div class="card-actions">
+            <a class="card-cta" href="https://play.google.com/store/apps/details?id=ai.tripare.tpnative&hl=en_IN" target="_blank" rel="noopener">Play Store <span class="arr">↗</span></a>
+            <a class="card-cta" href="https://apps.apple.com/us/app/tripare-ai-corporate-travel/id6759548390" target="_blank" rel="noopener">App Store <span class="arr">↗</span></a>
+            <a class="card-cta" href="https://www.tripare.ai/" target="_blank" rel="noopener">Website <span class="arr">↗</span></a>
+          </div>
+        </div>
+      </div>
+
+      <a class="card has-img reveal" style="--banner:url('Assets/FairPair.webp')" href="https://play.google.com/store/apps/details?id=com.fairpair&hl=en_IN" target="_blank" rel="noopener">
+        <div class="card-banner"><img class="app-icon" src="Assets/FairPair.webp" alt="FairPair icon"></div>
+        <div class="card-body">
+          <div class="ptop"><h3>FairPair</h3><span class="pdate">09/2023 — 06/2025</span></div>
+          <span class="ptag">AI-Powered Job Marketplace</span>
+          <ul>
+            <li>AI-powered job recommendations from skill matrix, eligibility score &amp; profile matching</li>
+            <li>Cut app load time by 20% through rendering &amp; performance optimisation</li>
+            <li>Twilio Voice in-app calling between candidates &amp; interviewers, plus real-time PubNub messaging</li>
+            <li>Scalable state with Redux Toolkit, Redux-Saga &amp; AsyncStorage offline caching</li>
+            <li>Firebase FCM, Crashlytics &amp; Mixpanel for notifications, crash reporting &amp; analytics</li>
+            <li>Secure auth via Google Sign-In &amp; Sign in with Apple</li>
+            <li>Stripe for premium features &amp; In-App Purchases for reports &amp; subscriptions</li>
+          </ul>
+          <div class="card-actions"><span class="card-cta">View on Play Store <span class="arr">↗</span></span></div>
+        </div>
+      </a>
+
+      <div class="card has-img reveal" style="--banner:url('Assets/Olive.webp')">
+        <div class="card-banner"><img class="app-icon" src="Assets/Olive.webp" alt="Olive icon"></div>
+        <div class="card-body">
+          <div class="ptop"><h3>Olive</h3><span class="pdate">08/2024 — 04/2025</span></div>
+          <span class="ptag">Dating, Friends &amp; Events App</span>
+          <ul>
+            <li>Fixed critical crashes and lifted the store rating from 1★ to 4★+</li>
+            <li>Real-time encrypted 1-to-1 &amp; group chat via PubNub — secure, low-latency messaging</li>
+            <li>Firebase FCM for background, message &amp; call/ringing notifications</li>
+            <li>Media sharing — images, audio &amp; video — with optimized caching &amp; fast delivery</li>
+            <li>In-App Purchases for Black Membership, event tickets &amp; subscriptions on iOS &amp; Android</li>
+            <li>Reels-style video feed with Gesture Handler &amp; Reanimated for smooth scroll &amp; playback</li>
+            <li>Secure auth, profiles &amp; social — likes, matches, friend requests &amp; events</li>
+          </ul>
+          <div class="card-actions">
+            <a class="card-cta" href="https://play.google.com/store/apps/details?id=olive.dating&hl=en_IN" target="_blank" rel="noopener">Play Store <span class="arr">↗</span></a>
+            <a class="card-cta" href="https://apps.apple.com/us/app/olive-dating-friends-events/id6736632251" target="_blank" rel="noopener">App Store <span class="arr">↗</span></a>
+            <a class="card-cta" href="https://joinolive.com/" target="_blank" rel="noopener">Website <span class="arr">↗</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card has-img reveal" style="--banner:url('Assets/ToneOp.webp')">
+        <span class="badge">100K+ · 4.5★</span>
+        <div class="card-banner"><img class="app-icon" src="Assets/ToneOp.webp" alt="ToneOp icon"></div>
+        <div class="card-body">
+          <div class="ptop"><h3>ToneOp</h3><span class="pdate">10/2025 — 02/2026</span></div>
+          <span class="ptag">Eats · Care · Fit — AI-Powered Wellness Platform</span>
+          <ul>
+            <li>Large-scale wellness app serving 100K+ active users, rated 4.5★</li>
+            <li>Built features across fitness plans, diet management, wellness tracking &amp; integrated e-commerce</li>
+            <li>AI Health Assistant on AWS Bedrock for conversational health &amp; nutrition guidance</li>
+            <li>Robust push notifications with Firebase FCM &amp; Notifee for reminders, order updates &amp; campaigns</li>
+            <li>Razorpay for secure subscriptions, consultations &amp; e-commerce payments</li>
+            <li>Secure auth &amp; logout with persistent sessions across reinstalls</li>
+            <li>New Relic Mobile for performance, crash diagnostics, network &amp; real-time analytics</li>
+          </ul>
+          <div class="card-actions">
+            <a class="card-cta" href="https://play.google.com/store/apps/details?id=com.toneop.mobile&hl=en_IN" target="_blank" rel="noopener">Play Store <span class="arr">↗</span></a>
+            <a class="card-cta" href="https://apps.apple.com/in/app/toneop-health-and-fitness-app/id1586794292" target="_blank" rel="noopener">App Store <span class="arr">↗</span></a>
+            <a class="card-cta" href="https://toneop.com/" target="_blank" rel="noopener">Website <span class="arr">↗</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card has-img reveal" style="--banner:url('Assets/AppoFit.webp')">
+        <div class="card-banner"><img class="app-icon" src="Assets/AppoFit.webp" alt="Appofit icon"></div>
+        <div class="card-body">
+          <div class="ptop"><h3>Appofit</h3><span class="pdate">10/2025 — 02/2026</span></div>
+          <span class="ptag">Fitness Platform for Trainers &amp; Gyms</span>
+          <ul>
+            <li>Personalized fitness platform for influencers, yoga &amp; gym owners, dietitians, nutritionists &amp; trainers</li>
+            <li>REST API features — workout plans, nutrition programs, client management &amp; content</li>
+            <li>Animated tab bars &amp; fluid navigation for a smooth, interactive UI</li>
+            <li>Firebase FCM for push notifications, reminders &amp; engagement alerts</li>
+            <li>Twilio in-app chat for seamless trainer–client communication</li>
+            <li>Google Fit &amp; Apple HealthKit sync — steps, calories, heart rate, distance &amp; workouts</li>
+          </ul>
+          <div class="card-actions">
+            <a class="card-cta" href="https://play.google.com/store/apps/details?id=com.bit.appofit" target="_blank" rel="noopener">Play Store <span class="arr">↗</span></a>
+            <a class="card-cta" href="https://appofit.com/" target="_blank" rel="noopener">Website <span class="arr">↗</span></a>
+          </div>
+        </div>
+      </div>
+
+      <a class="card has-img reveal" style="--banner:url('Assets/R1.webp')" href="https://play.google.com/store/apps/dev?id=5009562818756666886" target="_blank" rel="noopener">
+        <div class="card-banner"><img class="app-icon" src="Assets/R1.webp" alt="R1 Loss Control App icon"></div>
+        <div class="card-body">
+          <div class="ptop"><h3>R1 Loss Control App</h3><span class="pdate">Republic Indemnity</span></div>
+          <span class="ptag">Insurance Loss-Control &amp; Field Inspection</span>
+          <ul>
+            <li>Field inspection &amp; loss-control reporting for insurance workflows</li>
+            <li>Offline-first data capture with SQLite sync for low-connectivity field sites</li>
+            <li>Geofencing &amp; real-time location tracking for on-site inspections</li>
+            <li>Hardened with SSL / certificate pinning &amp; secure storage</li>
+            <li>Secure photo &amp; document upload with cloud storage</li>
+                        <li>In-app PDF viewer with instant report email delivery</li>
+            <li>Built with React Native, deployed to the Play Store</li>
+          </ul>
+          <div class="card-actions"><span class="card-cta">View on Play Store <span class="arr">↗</span></span></div>
+        </div>
+      </a>
+
+      <div class="card reveal card-ble">
+        <span class="badge">BLE</span>
+        <div class="card-banner"><svg class="ble-art" viewBox="0 0 120 80" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M50 26l20 20-10 8V18l10 8-20 20"/><path d="M80 24a22 22 0 0 1 0 32" opacity=".7"/><path d="M88 16a34 34 0 0 1 0 48" opacity=".45"/><path d="M40 24a22 22 0 0 0 0 32" opacity=".7"/><path d="M32 16a34 34 0 0 0 0 48" opacity=".45"/></g></svg></div>
+        <div class="card-body">
+          <div class="ptop"><h3>MyRena</h3><span class="pdate">TechAhead</span></div>
+          <span class="ptag">React Native App with Bluetooth (BLE) Hardware</span>
+          <ul>
+            <li>Bluetooth Low Energy discovery &amp; connection to nearby hardware devices</li>
+            <li>Real-time monitoring of device data streamed over BLE</li>
+            <li>Remote temperature control of the device straight from the app</li>
+            <li>Robust connection lifecycle — reconnects, state sync &amp; error recovery</li>
+          </ul>
+          <div class="card-actions"><span class="card-cta">Client project</span></div>
+        </div>
+      </div>
+
+      <!-- TODO: add href + icon (Assets/on-demand.webp) + has-img class + --banner when provided -->
+      <a class="card reveal" href="#" target="_blank" rel="noopener">
+        <div class="card-banner"><span class="init">On</span></div>
+        <div class="card-body">
+          <div class="ptop"><h3>On-Demand Service App</h3><span class="pdate">—</span></div>
+          <span class="ptag">Location-Based On-Demand Services</span>
+          <ul>
+            <li>Location-based service discovery via Google Maps — nearby provider search, route visualization, ETA &amp; live tracking</li>
+            <li>Complete booking lifecycle — creation, status updates, cancellations &amp; provider–client communication</li>
+            <li>Real-time 1-to-1 chat with PubNub — instant messaging, delivery receipts, typing indicators &amp; presence</li>
+            <li>Firebase Cloud Messaging (FCM) push notifications for booking updates, reminders &amp; status changes on Android &amp; iOS</li>
+          </ul>
+          <div class="card-actions"><span class="card-cta">View project <span class="arr">↗</span></span></div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- GITHUB / OPEN SOURCE -->
+  <section id="github">
+    <div class="sec-head reveal">
+      <span class="sec-num">05</span>
+      <h2 class="sec-title">Open <em>source</em></h2>
+      <span class="sec-rule"></span>
+    </div>
+    <p class="gh-intro reveal">Recent public repositories, pulled live from GitHub.</p>
+    <div class="gh-grid reveal" id="ghGrid">
+      <p class="gh-state">Loading repositories…</p>
+    </div>
+    <div class="gh-cta reveal">
+      <a class="btn ghost" href="https://github.com/AnubhavReact" target="_blank" rel="noopener">View full profile on GitHub ↗</a>
+    </div>
+  </section>
+
+  <!-- STACK + EDU -->
+  <section id="stack">
+    <div class="sec-head reveal">
+      <span class="sec-num">06</span>
+      <h2 class="sec-title">The <em>stack</em></h2>
+      <span class="sec-rule"></span>
+    </div>
+
+    <div class="skills-grid reveal">
+      <div class="skill-card">
+        <div class="sc-head">
+          <span class="sc-ico">⌘</span>
+          <div><h3>Cross-Platform</h3><div class="sc-sub">React Native &amp; the Expo toolchain</div></div>
+        </div>
+        <div class="skill-row"><div class="sr-top"><span>React Native (New Arch · Fabric)</span><span>95%</span></div><div class="bar"><i style="--pct:95%"></i></div></div>
+        <div class="skill-row"><div class="sr-top"><span>TypeScript / JavaScript</span><span>90%</span></div><div class="bar"><i style="--pct:90%"></i></div></div>
+        <div class="skill-row"><div class="sr-top"><span>Expo — EAS · OTA · DevClient</span><span>92%</span></div><div class="bar"><i style="--pct:92%"></i></div></div>
+        <div class="skill-row"><div class="sr-top"><span>Redux Toolkit · Saga · TanStack Query</span><span>86%</span></div><div class="bar"><i style="--pct:86%"></i></div></div>
+      </div>
+
+      <div class="skill-card">
+        <div class="sc-head">
+          <span class="sc-ico sc-swift">Sw</span>
+          <div><h3>Native iOS</h3><div class="sc-sub">Swift, SwiftUI &amp; bridging</div></div>
+        </div>
+        <div class="skill-row"><div class="sr-top"><span>Swift</span><span>75%</span></div><div class="bar"><i style="--pct:75%"></i></div></div>
+        <div class="skill-row"><div class="sr-top"><span>SwiftUI · UIKit · MVVM</span><span>72%</span></div><div class="bar"><i style="--pct:72%"></i></div></div>
+        <div class="skill-row"><div class="sr-top"><span>Native Modules (Swift / Obj-C)</span><span>80%</span></div><div class="bar"><i style="--pct:80%"></i></div></div>
+        <div class="skill-row"><div class="sr-top"><span>Xcode · Signing · App Store Connect</span><span>88%</span></div><div class="bar"><i style="--pct:88%"></i></div></div>
+      </div>
+
+      <div class="skill-card">
+        <div class="sc-head">
+          <span class="sc-ico">✦</span>
+          <div><h3>AI &amp; Device</h3><div class="sc-sub">LLMs, sensors &amp; hardware</div></div>
+        </div>
+        <div class="skill-row"><div class="sr-top"><span>LLM Integration — Bedrock, Gemini</span><span>84%</span></div><div class="bar"><i style="--pct:84%"></i></div></div>
+        <div class="skill-row"><div class="sr-top"><span>AI-Assisted Dev — Claude, Cursor</span><span>92%</span></div><div class="bar"><i style="--pct:92%"></i></div></div>
+        <div class="skill-row"><div class="sr-top"><span>Bluetooth (BLE)</span><span>80%</span></div><div class="bar"><i style="--pct:80%"></i></div></div>
+        <div class="skill-row"><div class="sr-top"><span>Geofencing · Location · Maps</span><span>85%</span></div><div class="bar"><i style="--pct:85%"></i></div></div>
+      </div>
+
+      <div class="skill-card">
+        <div class="sc-head">
+          <span class="sc-ico">◆</span>
+          <div><h3>Backend, Data &amp; Delivery</h3><div class="sc-sub">APIs, storage &amp; shipping</div></div>
+        </div>
+        <div class="skill-row"><div class="sr-top"><span>SQLite — Offline-First &amp; Sync</span><span>86%</span></div><div class="bar"><i style="--pct:86%"></i></div></div>
+        <div class="skill-row"><div class="sr-top"><span>REST APIs · GraphQL</span><span>87%</span></div><div class="bar"><i style="--pct:87%"></i></div></div>
+        <div class="skill-row"><div class="sr-top"><span>Firebase Suite</span><span>90%</span></div><div class="bar"><i style="--pct:90%"></i></div></div>
+        <div class="skill-row"><div class="sr-top"><span>CI/CD — EAS, Fastlane, Actions</span><span>88%</span></div><div class="bar"><i style="--pct:88%"></i></div></div>
+      </div>
+    </div>
+
+    <p class="more-skills-label reveal">Also comfortable with</p>
+    <div class="skill-cloud reveal">
+      <span class="skill">Objective-C</span><span class="skill">Kotlin / Java bridges</span><span class="skill">XCTest</span>
+      <span class="skill">CocoaPods</span><span class="skill">Jest · RNTL</span><span class="skill">Appium</span><span class="skill">Node.js / Express</span><span class="skill">MySQL</span>
+      <span class="skill">JWT · OAuth 2.0</span><span class="skill">SSL Pinning</span><span class="skill">Keychain / Keystore</span>
+      <span class="skill">Biometric Auth</span><span class="skill">Apple HealthKit</span><span class="skill">Google Fit</span>
+      <span class="skill">PubNub</span><span class="skill">Twilio Voice</span><span class="skill">WebSockets</span>
+      <span class="skill">Stripe</span><span class="skill">Razorpay</span><span class="skill">PayFort</span><span class="skill">In-App Purchases</span>
+      <span class="skill">FCM · APNs · Notifee</span><span class="skill">Deep Linking</span><span class="skill">Reanimated</span>
+      <span class="skill">FlashList</span><span class="skill">Crashlytics</span><span class="skill">New Relic</span>
+      <span class="skill">Mixpanel</span><span class="skill">React.js</span><span class="skill">Git</span><span class="skill">Agile</span>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="two-col">
+      <div>
+        <div class="sec-head reveal" style="margin-bottom:34px">
+          <span class="sec-num">07</span>
+          <h2 class="sec-title"><em>Education</em></h2>
+        </div>
+        <div class="edu-card reveal">
+          <h3>B.Tech, Computer Science Engineering</h3>
+          <div class="co">Kanpur Institute of Technology</div>
+          <div class="meta">08/2019 — 05/2023 · Kanpur, India</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="sec-head reveal" style="margin-bottom:34px">
+          <h2 class="sec-title"><em>Internship</em></h2>
+        </div>
+        <div class="edu-card reveal">
+          <h3>Frontend Developer</h3>
+          <div class="co">Edunet Foundation · IBM SkillBuild Program</div>
+          <div class="meta">01/2023 — 02/2023 · 2 Weeks</div>
+          <p class="edu-desc">Worked on front-end development using HTML &amp; CSS under the IBM SkillBuild program.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STRENGTHS / HOW I WORK -->
+  <section id="strengths">
+    <div class="sec-head reveal">
+      <span class="sec-num">08</span>
+      <h2 class="sec-title">How I <em>work</em></h2>
+      <span class="sec-rule"></span>
+    </div>
+    <div class="str-grid">
+      <div class="str reveal"><span class="ico">✦</span><span>AI-Assisted Development</span></div>
+      <div class="str reveal"><span class="ico">🧠</span><span>Strategic Problem Solving</span></div>
+      <div class="str reveal"><span class="ico">⚡</span><span>UI Performance Optimization</span></div>
+      <div class="str reveal"><span class="ico">⌘</span><span>Clean, Tested Code</span></div>
+      <div class="str reveal"><span class="ico">⏱️</span><span>On-Time Delivery</span></div>
+      <div class="str reveal"><span class="ico">💬</span><span>Client Communication</span></div>
+      <div class="str reveal"><span class="ico">🔒</span><span>Security-First Builds</span></div>
+      <div class="str reveal"><span class="ico">📡</span><span>Offline-First Thinking</span></div>
+      <div class="str reveal"><span class="ico">🚀</span><span>CI/CD &amp; DevOps</span></div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <div class="eyebrow reveal" style="justify-content:center">Let's build something</div>
+    <h2 class="big reveal">Have an app <em>in mind?</em></h2>
+    <div class="contact-row reveal">
+      <a class="btn primary" href="mailto:shuklaanubhav0512@gmail.com">✉ Email me</a>
+      <a class="btn ghost" href="tel:+917905078911">☎ +91 79050 78911</a>
+      <a class="btn ghost" href="https://www.linkedin.com/in/anubhav-shukla-6028041ab" target="_blank" rel="noopener">in LinkedIn</a>
+      <a class="btn ghost" href="Assets/ANUBHAV_CV.pdf" download>↓ Download CV</a>
+    </div>
+  </section>
+
+  <footer>
+    <span>© <span id="yr"></span> Anubhav Shukla — Built with React Native &amp; Swift energy.</span>
+    <span><a href="mailto:shuklaanubhav0512@gmail.com">shuklaanubhav0512@gmail.com</a> · Gurugram, IN</span>
+  </footer>
+
+</div>
+
+<span class="cursor-pet" id="cursorPet" aria-hidden="true">🐤</span>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // mobile hamburger menu
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  const setMenu = (open)=>{
+    navToggle.classList.toggle('open', open);
+    navLinks.classList.toggle('show', open);
+    navToggle.setAttribute('aria-expanded', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  };
+  navToggle.addEventListener('click', ()=> setMenu(!navToggle.classList.contains('open')));
+  navLinks.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=> setMenu(false)));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') setMenu(false); });
+
+  // scroll reveal
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach((e,i)=>{
+      if(e.isIntersecting){
+        e.target.style.transitionDelay = (e.target.dataset.d || 0)+'ms';
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  },{threshold:.12, rootMargin:'0px 0px -40px 0px'});
+
+  document.querySelectorAll('.reveal').forEach((el,i)=>{
+    // stagger items within the same grid
+    const sibs = [...el.parentElement.children].filter(c=>c.classList.contains('reveal'));
+    el.dataset.d = (sibs.indexOf(el) % 6) * 70;
+    io.observe(el);
+  });
+
+  // pointer-follow glow on project cards
+  document.querySelectorAll('.card').forEach(card=>{
+    card.addEventListener('pointermove',e=>{
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', ((e.clientX-r.left)/r.width*100)+'%');
+      card.style.setProperty('--my', ((e.clientY-r.top)/r.height*100)+'%');
+    });
+  });
+
+  // scrollspy — highlight active nav pill
+  const navAnchors = [...navLinks.querySelectorAll('a')];
+  const spySections = navAnchors
+    .map(a=> document.querySelector(a.getAttribute('href')))
+    .filter(Boolean);
+  const spy = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const link = navLinks.querySelector(`a[href="#${e.target.id}"]`);
+        if(!link) return;
+        navAnchors.forEach(a=> a.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  },{rootMargin:'-45% 0px -50% 0px', threshold:0});
+  spySections.forEach(s=> spy.observe(s));
+
+  // experience — click-to-toggle full details (works alongside hover on desktop)
+  document.querySelectorAll('.job .job-toggle').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const job = btn.closest('.job');
+      const open = job.classList.toggle('expanded');
+      btn.setAttribute('aria-expanded', open);
+    });
+  });
+
+  // cursor mascot — trails the pointer with a light spring lag
+  const pet = document.getElementById('cursorPet');
+  if(pet && window.matchMedia('(hover:hover)').matches && !window.matchMedia('(prefers-reduced-motion:reduce)').matches){
+    let px=0, py=0, tx=0, ty=0, started=false;
+    window.addEventListener('pointermove', e=>{
+      tx=e.clientX; ty=e.clientY;
+      if(!started){ px=tx; py=ty; started=true; pet.classList.add('show'); }
+    }, {passive:true});
+    document.addEventListener('pointerleave', ()=> pet.classList.remove('show'));
+    const tick = ()=>{
+      px += (tx-px)*.16; py += (ty-py)*.16;
+      const dx = tx-px;
+      pet.style.transform = `translate(${px}px, ${py}px) translate(-50%,-50%) rotate(${Math.max(-18,Math.min(18,dx*.5))}deg)`;
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
+  // GitHub — fetch and render recent public repos
+  (async function loadRepos(){
+    const grid = document.getElementById('ghGrid');
+    if(!grid) return;
+    const langColors = {
+      JavaScript:'#f1e05a', TypeScript:'#3178c6', Python:'#3572A5', HTML:'#e34c26',
+      CSS:'#563d7c', Java:'#b07219', Kotlin:'#A97BFF', Swift:'#F05138',
+      'Objective-C':'#438eff', Shell:'#89e051', Dart:'#00B4AB', 'C++':'#f34b7d'
+    };
+    const showState = (msg)=>{ grid.innerHTML=''; const p=document.createElement('p'); p.className='gh-state'; p.textContent=msg; grid.appendChild(p); };
+    try{
+      const res = await fetch('https://api.github.com/users/AnubhavReact/repos?sort=updated&per_page=100');
+      if(!res.ok) throw new Error('GitHub API error '+res.status);
+      const repos = await res.json();
+      const list = repos
+        .filter(r=>!r.fork && !r.private)
+        .sort((a,b)=> new Date(b.pushed_at) - new Date(a.pushed_at))
+        .slice(0,6);
+      if(!list.length){ showState('No public repositories yet — check the profile link below.'); return; }
+      grid.innerHTML='';
+      list.forEach(r=>{
+        const a = document.createElement('a');
+        a.className = 'gh-card reveal';
+        a.href = r.html_url; a.target='_blank'; a.rel='noopener';
+
+        const top = document.createElement('div'); top.className='gh-top';
+        top.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>';
+        const h3 = document.createElement('h3'); h3.textContent = r.name;
+        top.appendChild(h3);
+
+        const p = document.createElement('p'); p.textContent = r.description || 'No description provided.';
+
+        const meta = document.createElement('div'); meta.className='gh-meta';
+        if(r.language){
+          const lang = document.createElement('span'); lang.className='gh-lang';
+          lang.style.color = langColors[r.language] || 'var(--accent-2)';
+          const dot = document.createElement('i'); lang.appendChild(dot);
+          lang.append(r.language);
+          meta.appendChild(lang);
+        }
+        const star = document.createElement('span'); star.textContent = '★ '+r.stargazers_count;
+        meta.appendChild(star);
+
+        a.append(top,p,meta);
+        grid.appendChild(a);
+      });
+      grid.querySelectorAll('.reveal').forEach(el=>{ el.dataset.d = 0; io.observe(el); });
+    }catch(err){
+      showState("Couldn't load repositories right now — visit the GitHub profile below.");
+    }
+  })();
+</script>
+</body>
+</html>
