@@ -4,7 +4,7 @@
 window.PORTFOLIO = {
   profile: {
     name: 'Anubhav Shukla',
-    role: 'AI-Native Mobile Engineer',
+    role: 'Full-Stack Mobile Engineer',
     email: 'shuklaanubhav0512@gmail.com',
     phone: '+917905078911',
     phoneDisplay: '+91 79050 78911',
@@ -19,13 +19,18 @@ window.PORTFOLIO = {
     'Swift',
     'SwiftUI',
     'TypeScript',
+    'React',
+    'Next.js',
+    'Node.js',
+    'Express',
+    'MongoDB',
+    'SQL',
+    'Redis',
+    'AWS',
+    'Firebase',
+    'OAuth 2.0',
     'AI / LLM',
-    'Shopify',
-    'AWS (S3, Bedrock)',
-    'Offline-first',
-    'Bluetooth BLE',
     'CI/CD',
-    'OTA (EAS)',
   ],
 
   // Layer letters: E Experience · I Intelligence · C Commerce · D Data & sync
@@ -61,10 +66,10 @@ window.PORTFOLIO = {
     {
       key: 'D',
       n: '04',
-      name: 'Data & sync',
-      sub: '(offline / SQLite / APIs)',
-      plain: 'Keep the app reliable offline, with local storage and seamless sync.',
-      chips: ['SQLite', 'Offline-first', 'REST API', 'GraphQL', 'AWS S3'],
+      name: 'Data & backend',
+      sub: '(Node.js / APIs / sync)',
+      plain: 'Reliable data end to end: offline storage and sync on the device, Node.js APIs on the server.',
+      chips: ['Node.js', 'Express', 'Redis', 'REST / GraphQL', 'SQLite', 'AWS S3'],
       slug: 'data',
     },
     {
@@ -80,9 +85,9 @@ window.PORTFOLIO = {
       key: 'R',
       n: '06',
       name: 'Real-time',
-      sub: '(chat / VoIP)',
-      plain: 'Chat, presence, voice calling and live status updates.',
-      chips: ['PubNub', 'Twilio Voice', 'VoIP', 'WebSockets'],
+      sub: '(chat / VoIP / push)',
+      plain: 'Chat, presence, voice calling, live status and server-sent push notifications.',
+      chips: ['PubNub', 'Twilio Voice', 'WebSockets', 'FCM / APNs', 'Firebase Admin SDK'],
       slug: 'realtime',
     },
     {
@@ -97,6 +102,8 @@ window.PORTFOLIO = {
   ],
 
   // links: an empty or missing value hides that button.
+  // platforms: what I built for it. If missing, derived from store links (iOS / Android).
+  //   Allowed: 'iOS', 'Android', 'Web', 'Backend'.
   apps: [
     {
       id: 'tripare',
@@ -106,6 +113,7 @@ window.PORTFOLIO = {
       layers: 'EICDT',
       tags: ['ai', 'pay'],
       featured: true,
+      platforms: ['iOS', 'Android', 'Web', 'Backend'],
       result: 'Live on both stores',
       links: {
         appStore: 'https://apps.apple.com/us/app/tripare-ai-corporate-travel/id6759548390',
@@ -120,8 +128,9 @@ window.PORTFOLIO = {
       icon: 'assets/logos/toneop.webp',
       layers: 'EICDT',
       tags: ['ai', 'ecom', 'pay'],
-      desc: 'Diet, fitness and care with an AI health assistant on AWS Bedrock and an integrated Shopify-powered store.',
-      stack: ['AWS Bedrock', 'Shopify', 'Firebase', 'Notifee'],
+      platforms: ['iOS', 'Android', 'Backend'],
+      desc: 'Diet, fitness and care with an AI health assistant on AWS Bedrock, Razorpay payments, OAuth 2.0 login, push notifications and a Shopify store. I worked on the Node.js backend APIs as well as the app.',
+      stack: ['AWS Bedrock', 'Node.js', 'Razorpay', 'OAuth 2.0', 'Firebase'],
       result: '100K+ users · 4.5★',
       links: {
         appStore: 'https://apps.apple.com/in/app/toneop-health-and-fitness-app/id1586794292',
@@ -150,8 +159,9 @@ window.PORTFOLIO = {
       icon: 'assets/logos/olive.webp',
       layers: 'ECRT',
       tags: ['rt', 'pay', 'ecom'],
-      desc: 'Dating, friends and events with encrypted real-time chat, media sharing and In-App Purchases.',
-      stack: ['PubNub', 'In-App Purchases', 'FCM'],
+      platforms: ['iOS', 'Android', 'Backend'],
+      desc: 'Dating, friends and events with encrypted real-time chat, media sharing and In-App Purchases, plus Node.js backend work for push notifications and APIs.',
+      stack: ['PubNub', 'In-App Purchases', 'Node.js', 'FCM'],
       result: '1★ → 4★+ rating',
       links: {
         appStore: 'https://apps.apple.com/us/app/olive-dating-friends-events/id6736632251',
@@ -166,8 +176,9 @@ window.PORTFOLIO = {
       icon: 'assets/logos/appofit.webp',
       layers: 'ESRT',
       tags: ['ios', 'rt', 'iot'],
-      desc: 'Platform for trainers and gyms: plans, clients, Twilio chat, Apple HealthKit and Google Fit sync.',
-      stack: ['HealthKit', 'Google Fit', 'Twilio'],
+      platforms: ['Android', 'Web'],
+      desc: 'Platform for trainers and gyms: plans, clients, Twilio chat, Apple HealthKit and Google Fit sync. I also built the Appofit website in React.js.',
+      stack: ['HealthKit', 'Google Fit', 'Twilio', 'React.js'],
       result: 'Trainers & gyms',
       links: {
         playStore: 'https://play.google.com/store/apps/details?id=com.bit.appofit',
@@ -253,13 +264,14 @@ window.PORTFOLIO = {
   ],
 
   featured: {
-    subtitle: 'AI corporate travel & expense · Antino Labs',
+    subtitle: 'AI corporate travel & expense · app + web + backend · Antino Labs',
     desc: 'An AI travel assistant that plans, books and manages business travel within company policy and budget.',
     bullets: [
       'AI travel assistant + budget engine',
-      'BoxPay payments, FCM & APNs alerts',
-      'CI/CD (GitHub Actions), OTA (Expo Updates)',
-      'Node.js + MySQL feature flags',
+      'BoxPay payments, CI/CD (GitHub Actions), OTA (Expo Updates)',
+      'Push notifications from the backend: Node.js + Firebase Admin SDK (FCM & APNs)',
+      'OAuth 2.0 authentication and super-admin APIs (Node.js, Express, MySQL)',
+      'React admin panel for the super-admin side',
     ],
     steps: [
       { title: 'Ask', text: 'Tell the AI your trip, dates and budget (e.g. “Goa, 3 days, ₹25,000”).' },
@@ -272,17 +284,17 @@ window.PORTFOLIO = {
     {
       level: 3,
       title: 'Daily driver',
-      items: 'React Native (New Architecture) · TypeScript · Expo & EAS · Redux Toolkit · TanStack Query · Firebase · REST APIs · Push notifications · App Store & Play Store releases · AI-assisted development (Claude, Cursor)',
+      items: 'React Native (New Architecture) · TypeScript · Expo & EAS · Redux Toolkit · TanStack Query · Firebase · REST APIs · Push notifications · Node.js · Express · App Store & Play Store releases · AI-assisted development (Claude, Cursor)',
     },
     {
       level: 2,
       title: 'Production-proven',
-      items: 'Swift · SwiftUI · UIKit · Native modules · LLM integration · AWS Bedrock · Gemini · Stripe · Razorpay · PayFort · BoxPay · In-App Purchases · Shopify · SQLite offline sync · Bluetooth BLE · Geofencing · Google Maps · PubNub · Twilio Voice · SSL pinning · GitHub Actions · Fastlane',
+      items: 'Swift · SwiftUI · UIKit · Native modules · React · Next.js · Redis · MySQL · MongoDB · PostgreSQL · OAuth 2.0 / JWT · Firebase Admin SDK · AWS (Lambda, S3, EC2, Bedrock) · LLM integration · Gemini · Stripe · Razorpay · PayFort · BoxPay · In-App Purchases · Shopify · SQLite offline sync · Bluetooth BLE · Geofencing · Google Maps · PubNub · Twilio Voice · SSL pinning · GitHub Actions · Fastlane',
     },
     {
       level: 1,
       title: 'Comfortable with',
-      items: 'Objective-C · Kotlin / Java bridges · GraphQL · WebSockets · Node.js · Express · MySQL · AWS S3 (SDK uploads) · PDF, printing & OCR · XCTest · Jest · Appium · Mixpanel · New Relic',
+      items: 'Objective-C · Kotlin / Java bridges · GraphQL · WebSockets · Docker · Elasticsearch · Cron jobs · PDF, printing & OCR · XCTest · Jest · Appium · Mixpanel · New Relic',
     },
   ],
 
@@ -290,30 +302,31 @@ window.PORTFOLIO = {
     {
       period: 'Feb 2026 – Present',
       current: true,
-      role: 'Senior React Native Developer',
+      role: 'Software Engineer',
       company: 'Antino Labs · Gurugram',
-      text: 'Architected Tripare.Ai: AI travel assistant, budget engine, BoxPay, CI/CD across Dev/UAT/Prod, OTA rollouts, deep links, own store releases.',
+      text: 'Architected Tripare.Ai end to end. App: AI travel assistant, budget engine, BoxPay, OTA, store releases. Web + backend: React admin panel, Node.js push notifications (Firebase Admin SDK), OAuth 2.0, super-admin APIs.',
     },
     {
       period: 'Oct 2025 – Feb 2026 · Contract',
-      role: 'React Native Developer',
+      role: 'Software Engineer',
       company: 'Bansal Technology · Bhopal',
-      text: 'ToneOp (100K+ users, 4.5★): stability, performance, AI health assistant on AWS Bedrock. Built Appofit for trainers and gyms.',
+      text: 'ToneOp (100K+ users, 4.5★): stability, performance, AI health assistant on AWS Bedrock, push notifications, Razorpay SDK payments, OAuth 2.0 auth and Node.js backend APIs. Built the Appofit app and its React.js website for trainers and gyms.',
     },
     {
       period: 'Jun 2023 – Oct 2025',
-      role: 'React Native Developer',
+      role: 'Associate Software Engineer',
       company: 'TechAhead · Noida',
-      text: 'FairPair, Olive, R1 Loss Control, MyRena, On-Demand apps, JHA. Native Swift/Obj-C modules, BLE, offline-first SQLite, PubNub, five payment gateways.',
+      text: 'FairPair, Olive, R1 Loss Control, MyRena, On-Demand apps, JHA. Native Swift/Obj-C modules, BLE, offline-first SQLite, PubNub, five payment gateways, and Node.js backend work on Olive.',
     },
   ],
 
   about: {
-    bio: "I got into mobile development because I enjoy building applications that people can use in their everyday lives. Over the past 3.5+ years, I've worked on Android and iOS apps, solving challenges around performance, native integrations, and user experience. I particularly enjoy debugging complex issues and turning ideas into smooth, reliable mobile experiences. Going forward, I want to build scalable, AI-powered mobile applications that solve real-world problems.",
+    bio: "I got into mobile development because I enjoy building applications that people can use in their everyday lives. Over the past 3.5+ years, I've worked on Android and iOS apps and, increasingly, on the backend behind them: Node.js and Express APIs, push notifications with the Firebase Admin SDK, OAuth 2.0 authentication and super-admin tools on products like Tripare.Ai, ToneOp and Olive. Owning both sides means I can take a feature from the database to the screen without hand-offs. I particularly enjoy debugging complex issues and turning ideas into smooth, reliable products. Going forward, I want to build scalable, AI-powered mobile products end to end, from app to backend, that solve real-world problems.",
     education: { label: 'EDUCATION · 2019 – 2023', title: 'B.Tech, Computer Science', place: 'Kanpur Institute of Technology' },
     internship: { label: 'INTERNSHIP · 2023', title: 'Frontend Developer', place: 'Edunet Foundation · IBM SkillBuild' },
     ways: [
       'AI-assisted development',
+      'App + web + backend ownership',
       'Strategic problem solving',
       'UI performance',
       'Clean, tested code',

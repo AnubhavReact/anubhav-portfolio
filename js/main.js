@@ -74,14 +74,6 @@
       '<div class="dots" role="img" aria-label="Used in ' + count + ' of ' + N + ' apps">' + dots + '</div></div></li>';
   }).join('');
 
-  // ---------- top apps by layer count ----------
-  var top = apps.slice().sort(function (a, b) { return b.layers.length - a.layers.length; }).slice(0, 4);
-  $('#top-list').innerHTML = top.map(function (a) {
-    return '<li><img src="' + esc(a.icon) + '" width="36" height="36" alt="" loading="lazy" decoding="async">' +
-      '<div class="top-text"><b>' + esc(a.name) + '</b><span>' + esc(a.domain) + '</span></div>' +
-      '<span class="badge-count">' + a.layers.length + ' / ' + D.layers.length + ' layers</span></li>';
-  }).join('');
-
   // ---------- link buttons ----------
   function linkButtons(a, cls) {
     var l = a.links || {};
@@ -95,6 +87,27 @@
     }).join('');
   }
 
+  // ---------- platform badges (what I built: app / web / backend) ----------
+  var PLAT_ICON = {
+    iOS: '<rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/>',
+    Android: '<rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/>',
+    Web: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/>',
+    Backend: '<rect x="4" y="4" width="16" height="6" rx="1.5"/><rect x="4" y="14" width="16" height="6" rx="1.5"/><path d="M8 7h.01M8 17h.01"/>'
+  };
+  function platforms(a) {
+    if (a.platforms) return a.platforms;
+    var l = a.links || {}, p = [];
+    if (l.appStore) p.push('iOS');
+    if (l.playStore) p.push('Android');
+    return p;
+  }
+  function platBadges(a) {
+    return platforms(a).map(function (p) {
+      return '<li class="plat plat--' + esc(p.toLowerCase()) + '"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+        (PLAT_ICON[p] || '') + '</svg>' + esc(p) + '</li>';
+    }).join('');
+  }
+
   // ---------- featured ----------
   if (featured) {
     var F = D.featured;
@@ -103,6 +116,7 @@
     icon.alt = featured.name + ' logo';
     $('#feat-h').textContent = featured.name;
     $('#feat-sub').textContent = F.subtitle;
+    $('#feat-plats').innerHTML = platBadges(featured);
     $('#feat-desc').textContent = F.desc;
     $('#feat-bullets').innerHTML = F.bullets.map(function (b) { return '<li>' + tick + '<span>' + esc(b) + '</span></li>'; }).join('');
     $('#feat-links').innerHTML = linkButtons(featured, 'btn--sm');
@@ -118,6 +132,7 @@
     return '<li data-id="' + esc(a.id) + '"><article class="proj" aria-labelledby="p-' + esc(a.id) + '">' +
       '<div class="proj-id"><img src="' + esc(a.icon) + '" width="48" height="48" alt="' + esc(a.name) + ' logo" loading="lazy" decoding="async">' +
       '<div><h3 id="p-' + esc(a.id) + '">' + esc(a.name) + '</h3><span>' + esc(a.domain) + '</span></div></div>' +
+      (platforms(a).length ? '<ul class="plats" aria-label="Built for">' + platBadges(a) + '</ul>' : '') +
       '<p>' + esc(a.desc || '') + '</p>' +
       '<div class="chips">' + (a.stack || []).map(function (s) { return '<span class="chip">' + esc(s) + '</span>'; }).join('') + '</div>' +
       '<span class="result">' + esc(a.result) + '</span>' +
